@@ -1,0 +1,16 @@
+# TODO Get todos
+GET http://localhost:3000/api/v1/todos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2MTI1YTlhMWFiZTllMDk0ZWQiLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjUyNjE0fQ.8HLmqsWSggeCH5xNkeR1-evPedfq1Bvhi1q5nijMQjM
+
+###
+
+# Add a new todo
+POST http://localhost:3000/api/v1/todos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2MTI1YTlhMWFiZTllMDk0ZWQiLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjUyNjE0fQ.8HLmqsWSggeCH5xNkeR1-evPedfq1Bvhi1q5nijMQjM
+
+{
+    "title": "cool title",
+    "body": "nice body"
+}
