@@ -4,7 +4,7 @@ import 'dotenv/config';
 import { dbConnect } from './helpers/db.connect';
 import { errorHandler, noRouteHandler } from './helpers/handlers';
 import usersRouter from './users/users.router';
-import todosRouter from './todos/todos.router';
+import todosRouter from './src/todos/todos.router';
 import { verifyToken } from './users/users.middleware';
 
 const app = express();

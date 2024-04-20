@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { StandardResponse } from "../helpers/types";
+import { StandardResponse } from "../../helpers/types";
 import { Todo, TodoModel } from "./todos.model";
 
 export const getTodos: RequestHandler<unknown, StandardResponse<Todo[]>, unknown, { page: number; }> = async (req, res, next) => {
