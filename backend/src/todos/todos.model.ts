@@ -19,4 +19,3 @@ export const todoSchema = new Schema({
 }, { timestamps: true, versionKey: false });
 
 export type Todo = InferSchemaType<typeof todoSchema>;
-export const TodoModel = model<Todo>('todo', todoSchema);

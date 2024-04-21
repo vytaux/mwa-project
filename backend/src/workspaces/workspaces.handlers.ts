@@ -9,12 +9,14 @@ export const getWorkspaces: RequestHandler<unknown, StandardResponse<Workspace[]
         const userId = req.token._id;
 
         // User can access workspaces they own or are members of
-        const results = await WorkspaceModel.find({
-            $or: [
-                { owner_id: userId },
-                { members: { $elemMatch: { user_id: userId } } }
-            ]
-        })
+        const results = await WorkspaceModel.find(
+            {
+                $or: [
+                    { owner_id: userId },
+                    { members: { $elemMatch: { user_id: userId } } }
+                ]
+            },
+            { _id: 1, name: 1 })
             .skip((page - 1) * pageSize)
             .limit(pageSize);
 
@@ -101,8 +103,6 @@ export const addMemberToWorkspace: RequestHandler<{ workspaceId: string }, Stand
         const userId = req.token._id;
         const { user_id, email } = req.body;
 
-        console.log(workspaceId,userId,user_id,email);
-
         const memberAdded = await WorkspaceModel.updateOne(
             { _id: workspaceId, 'owner_id': userId },
             { $addToSet: { members: { user_id, email } } }
@@ -132,7 +132,7 @@ export const removeMemberFromWorkspace: RequestHandler<{ workspaceId: string }, 
         if (memberAdded.modifiedCount < 1) {
             throw new Error("Error while removing member");
         }
-        
+
         res.status(200).json({ success: true, data: memberAdded.modifiedCount });
     } catch (error) {
         next(error);
