@@ -1,13 +1,17 @@
 import { RequestHandler } from "express";
-import { StandardResponse } from "../../helpers/types";
+import { StandardResponse } from "../helpers/types";
 import { Todo, TodoModel } from "./todos.model";
 
 export const getTodos: RequestHandler<unknown, StandardResponse<Todo[]>, unknown, { page: number; }> = async (req, res, next) => {
     try {
         const pageSize = 10;
         const page = req.query.page || 1;
+        const userId = req.token._id;
 
-        const results = await TodoModel.find({})
+        // User can only access their own todos
+        const results = await TodoModel.find({
+            'created_by.user_id': userId
+        })
             .skip((page - 1) * pageSize)
             .limit(pageSize);
 
@@ -19,7 +23,7 @@ export const getTodos: RequestHandler<unknown, StandardResponse<Todo[]>, unknown
 
 export const getTodoById: RequestHandler<{ todoId: string }, StandardResponse<Todo | null>> = async (req, res, next) => {
     try {
-        const { todoId } = req.params;
+        const todoId = req.params.todoId;
         const todo = await TodoModel.findOne({ _id: todoId });
         res.status(200).json({ success: true, data: todo });
     } catch (error) {
@@ -31,12 +35,13 @@ export const postTodo: RequestHandler<unknown, StandardResponse<string>, Todo> =
     try {
         const newTodo = req.body;
         const { _id, email } = req.token;
+
         const created = await TodoModel.create({
             ...newTodo,
             created_by: { user_id: _id, email }
         });
-        res.status(200).json({ success: true, data: created._id.toString() });
 
+        res.status(200).json({ success: true, data: created._id.toString() });
     } catch (error) {
         next(error);
     }
@@ -46,8 +51,9 @@ export const putTodoById: RequestHandler<{ todoId: string }, StandardResponse<nu
     try {
         const { todoId } = req.params;
         const updateTodo = req.body;
-        const { _id: userId } = req.token;
+        const userId = req.token._id;
 
+        // User can only update their own todos
         const results = await TodoModel.updateOne(
             { _id: todoId, 'created_by.user_id': userId },
             { $set: updateTodo }
@@ -63,11 +69,12 @@ export const putTodoById: RequestHandler<{ todoId: string }, StandardResponse<nu
 export const deleteTodoById: RequestHandler<{ todoId: string }, StandardResponse<number>> = async (req, res, next) => {
     try {
         const todoId = req.params.todoId;
-        const { _id } = req.token;
+        const userId = req.token._id;
 
+        // User can only delete their own todos
         const results = await TodoModel.deleteOne({
             _id: todoId,
-            'created_by.user_id': _id 
+            'created_by.user_id': userId
         });
 
         res.status(200).json({ success: true, data: results.deletedCount });

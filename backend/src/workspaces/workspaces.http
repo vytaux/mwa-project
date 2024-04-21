@@ -1,0 +1,39 @@
+# Get workspaces
+GET http://localhost:3000/api/v1/workspaces
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NjhkOGY5M2FjNWQ0M2ZhZjRiZDciLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjYyMTcyfQ.kw03uktZrpzsC72vD66ZFGtDmdB7FWnlIEU7cOU9pBM
+
+###
+
+# Add a new workspace
+POST http://localhost:3000/api/v1/workspaces
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NjhkOGY5M2FjNWQ0M2ZhZjRiZDciLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjYyMTcyfQ.kw03uktZrpzsC72vD66ZFGtDmdB7FWnlIEU7cOU9pBM
+
+{
+    "name": "cool title"
+}
+
+###
+
+# Update a workspace
+PUT http://localhost:3000/api/v1/workspaces/66246926f93ac5d43faf4bda
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NjhkOGY5M2FjNWQ0M2ZhZjRiZDciLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjYyMTcyfQ.kw03uktZrpzsC72vD66ZFGtDmdB7FWnlIEU7cOU9pBM
+
+# Add a member to a workspace
+{
+    "name": "cool title updated",
+    "members": [{
+        "user_id": "6624426125a9a1abe9e094ed",
+        "email": "some@gmail.com"
+    }]
+}
+
+###
+
+# Delete a workspace
+
+DELETE http://localhost:3000/api/v1/workspaces/66246926f93ac5d43faf4bda
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NjhkOGY5M2FjNWQ0M2ZhZjRiZDciLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjYyMTcyfQ.kw03uktZrpzsC72vD66ZFGtDmdB7FWnlIEU7cOU9pBM
