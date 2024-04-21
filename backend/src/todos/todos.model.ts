@@ -1,13 +1,23 @@
 import { InferSchemaType, Schema, model } from "mongoose";
 
 const todoSchema = new Schema({
-    title: { type: String, required: true },
-    body: { type: String, required: true },
+    title: { type: String, required: true, trim: true },
+    body: { type: String, trim: true },
+    dueDate: { type: Date, required: false },
+    completed_at: { type: Date },
     created_by: {
         user_id: Schema.Types.ObjectId,
         email: String
-    }
-}, { versionKey: false });
+    },
+    category: {
+        type: String,
+        enum: ['personal', 'work', 'other'],
+        default: 'personal',
+        trim: true
+    },
+    tags: [String],
+    deletedAt: { type: Date, default: null }
+}, { timestamps: true, versionKey: false });
 
 export type Todo = InferSchemaType<typeof todoSchema>;
 export const TodoModel = model<Todo>('todo', todoSchema);
