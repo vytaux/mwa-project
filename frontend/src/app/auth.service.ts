@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { environment } from './../environments/environment.development'
+import { Router } from '@angular/router';
  
 export interface User {
   id: string;
@@ -34,7 +35,7 @@ export const initialState = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {
+  constructor(private router: Router) {
     effect(() => {
       localStorage.setItem('State', JSON.stringify(this.$state()));
     });
@@ -52,6 +53,16 @@ export class AuthService {
  
   is_logged_in() {
     return this.$state().token ? true : false;
+  }
+
+  canActivate(): boolean {
+    const isLoggedIn = !!localStorage.getItem('token');
+
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
+
+    return isLoggedIn;
   }
 }
  
