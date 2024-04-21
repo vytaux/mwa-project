@@ -14,8 +14,8 @@ const app = express();
 dbConnect();
 
 app.use(morgan('dev'));
-app.use(cors);
-app.use(helmet());
+app.use(cors());
+// app.use(helmet());
 
 
 app.use('/api/v1', usersRouter);
