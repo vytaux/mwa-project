@@ -7,18 +7,11 @@ export const getTodos: RequestHandler<{ workspaceId: string }, StandardResponse<
     try {
         const pageSize = 10;
         const page = req.query.page || 1;
-        const userId = req.token._id;
         const workspaceId = req.params.workspaceId;
 
         const results = await WorkspaceModel.findOne(
-            {
-                _id: workspaceId,
-                $or: [
-                    { owner_id: userId },
-                    { members: { $elemMatch: { user_id: userId } } }
-                ]
-            },
-            { _id: 0, members: 1 }
+            { _id: workspaceId },
+            { _id: 0, todos: 1 }
         )
             .skip((page - 1) * pageSize)
             .limit(pageSize);
@@ -29,11 +22,14 @@ export const getTodos: RequestHandler<{ workspaceId: string }, StandardResponse<
     }
 }
 
-export const getTodoById: RequestHandler<{ workspaceId: string, todoId: string }, StandardResponse<Todo | null>> = async (req, res, next) => {
+export const getTodoById: RequestHandler<{ workspaceId: string, todoId: string }, StandardResponse<any>> = async (req, res, next) => {
     try {
         const workspaceId = req.params.workspaceId;
         const todoId = req.params.todoId;
-        const todo = await TodoModel.findOne({ _id: todoId });
+        const todo = await WorkspaceModel.findOne(
+            { _id: workspaceId, 'todos._id': todoId },
+            { _id: 0, 'todos.$': 1 }
+        );
         res.status(200).json({ success: true, data: todo });
     } catch (error) {
         next(error);
@@ -75,16 +71,15 @@ export const postTodo: RequestHandler<{ workspaceId: string }, StandardResponse<
     }
 }
 
-export const putTodoById: RequestHandler<{ todoId: string }, StandardResponse<number>, Todo> = async (req, res, next) => {
+export const putTodoById: RequestHandler<{ workspaceId: string, todoId: string }, StandardResponse<number>, Todo> = async (req, res, next) => {
     try {
-        const { todoId } = req.params;
+        const { workspaceId, todoId } = req.params;
         const updateTodo = req.body;
         const userId = req.token._id;
 
-        // User can only update their own todos
-        const results = await TodoModel.updateOne(
-            { _id: todoId, 'created_by.user_id': userId },
-            { $set: updateTodo }
+        const results = await WorkspaceModel.updateOne(
+            { _id: workspaceId, 'todos._id': todoId },
+            { $set: { "todos.$": updateTodo } }
         );
 
         res.status(200).json({ success: true, data: results.modifiedCount });
@@ -94,18 +89,17 @@ export const putTodoById: RequestHandler<{ todoId: string }, StandardResponse<nu
     }
 }
 
-export const deleteTodoById: RequestHandler<{ todoId: string }, StandardResponse<number>> = async (req, res, next) => {
+export const deleteTodoById: RequestHandler<{ workspaceId: string, todoId: string }, StandardResponse<number>> = async (req, res, next) => {
     try {
-        const todoId = req.params.todoId;
+        const { workspaceId, todoId } = req.params;
         const userId = req.token._id;
 
-        // User can only delete their own todos
-        const results = await TodoModel.deleteOne({
-            _id: todoId,
-            'created_by.user_id': userId
-        });
+        const results = await WorkspaceModel.updateOne(
+            { _id: workspaceId },
+            { $pull: { todos: { _id: todoId } } }
+        );
 
-        res.status(200).json({ success: true, data: results.deletedCount });
+        res.status(200).json({ success: true, data: results.modifiedCount });
 
     } catch (error) {
         next(error);

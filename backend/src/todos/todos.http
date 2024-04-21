@@ -1,5 +1,12 @@
 # Get todos
-GET http://localhost:3000/api/v1/todos
+GET http://localhost:3000/api/v1/workspaces/6625712043a6c1b549b5a26f/todos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2MTI1YTlhMWFiZTllMDk0ZWQiLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjUyNjE0fQ.8HLmqsWSggeCH5xNkeR1-evPedfq1Bvhi1q5nijMQjM
+
+###
+
+# Get todo by id
+GET http://localhost:3000/api/v1/workspaces/6625712043a6c1b549b5a26f/todos/6625890998fb16893a007dbc
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2MTI1YTlhMWFiZTllMDk0ZWQiLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjUyNjE0fQ.8HLmqsWSggeCH5xNkeR1-evPedfq1Bvhi1q5nijMQjM
 
