@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './workspace.component.html',
-  styleUrl: './workspace.component.css'
 })
 export class WorkspaceComponent {
 
