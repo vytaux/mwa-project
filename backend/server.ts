@@ -19,7 +19,7 @@ app.use(cors());
 
 
 app.use('/api/v1', usersRouter);
-app.use('/api/v1/todos', verifyToken, todosRouter);
+// app.use('/api/v1/todos', verifyToken, todosRouter);
 app.use('/api/v1/workspaces', verifyToken, workspacesRouter);
 
 app.all('*', noRouteHandler);

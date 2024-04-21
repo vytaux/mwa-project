@@ -1,12 +1,14 @@
 import { InferSchemaType, Schema, model } from "mongoose";
+import { todoSchema } from "../todos/todos.model";
 
 const workspaceSchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     owner_id: { type: Schema.Types.ObjectId },
-    members: [{
-        user_id: Schema.Types.ObjectId,
+    members: [{ 
+        user_id: String,
         email: String
-    }]
+    }],
+    todos: [todoSchema]
 }, { versionKey: false });
 
 export type Workspace = InferSchemaType<typeof workspaceSchema>;

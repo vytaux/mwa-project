@@ -30,10 +30,10 @@ export const getWorkspaceById: RequestHandler<{ workspaceId: string }, StandardR
         const userId = req.token._id;
 
         // User can access workspaces they own or are members of
-        const workspace = await WorkspaceModel.findOne({ 
-            _id: workspaceId, 
+        const workspace = await WorkspaceModel.findOne({
+            _id: workspaceId,
             $or: [
-                { owner_id: userId }, 
+                { owner_id: userId },
                 { members: { $elemMatch: { user_id: userId } } }
             ]
         });
@@ -85,11 +85,55 @@ export const deleteWorkspaceById: RequestHandler<{ workspaceId: string }, Standa
 
         // User can only delete workspaces they own
         const results = await WorkspaceModel.deleteOne({
-            _id: workspaceId, owner_id: userId 
+            _id: workspaceId, owner_id: userId
         });
 
         res.status(200).json({ success: true, data: results.deletedCount });
 
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const addMemberToWorkspace: RequestHandler<{ workspaceId: string }, StandardResponse<number>, { user_id: string, email: string }> = async (req, res, next) => {
+    try {
+        const workspaceId = req.params.workspaceId;
+        const userId = req.token._id;
+        const { user_id, email } = req.body;
+
+        console.log(workspaceId,userId,user_id,email);
+
+        const memberAdded = await WorkspaceModel.updateOne(
+            { _id: workspaceId, 'owner_id': userId },
+            { $addToSet: { members: { user_id, email } } }
+        );
+
+        if (memberAdded.modifiedCount < 1) {
+            throw new Error("Error while adding member");
+        }
+
+        res.status(200).json({ success: true, data: memberAdded.modifiedCount });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const removeMemberFromWorkspace: RequestHandler<{ workspaceId: string }, StandardResponse<number>, { user_id: string, email: string }> = async (req, res, next) => {
+    try {
+        const workspaceId = req.params.workspaceId;
+        const userId = req.token._id;
+        const { user_id, email } = req.body;
+
+        const memberAdded = await WorkspaceModel.updateOne(
+            { _id: workspaceId, 'owner_id': userId },
+            { $pull: { members: { user_id: user_id } } }
+        );
+
+        if (memberAdded.modifiedCount < 1) {
+            throw new Error("Error while removing member");
+        }
+        
+        res.status(200).json({ success: true, data: memberAdded.modifiedCount });
     } catch (error) {
         next(error);
     }

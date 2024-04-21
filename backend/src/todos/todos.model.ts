@@ -1,6 +1,6 @@
 import { InferSchemaType, Schema, model } from "mongoose";
 
-const todoSchema = new Schema({
+export const todoSchema = new Schema({
     title: { type: String, required: true, trim: true },
     body: { type: String, trim: true },
     dueDate: { type: Date, required: false },
@@ -13,7 +13,6 @@ const todoSchema = new Schema({
         type: String,
         enum: ['personal', 'work', 'other'],
         default: 'personal',
-        trim: true
     },
     tags: [String],
     deletedAt: { type: Date, default: null }

@@ -1,7 +1,7 @@
 import express, { json } from 'express';
 import { postTodo, getTodos, getTodoById, putTodoById, deleteTodoById } from './todos.handlers';
 
-const todosRouter = express.Router();
+const todosRouter = express.Router({mergeParams: true});
 
 todosRouter.get('/', getTodos);
 todosRouter.post('/', json(), postTodo);
