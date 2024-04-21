@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import 'dotenv/config';
 import { dbConnect } from './helpers/db.connect';
 import { errorHandler, noRouteHandler } from './helpers/handlers';
-import usersRouter from './users/users.router';
+import usersRouter from './src/users/users.router';
 import todosRouter from './src/todos/todos.router';
 import { verifyToken } from './users/users.middleware';
 
