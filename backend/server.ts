@@ -14,7 +14,7 @@ const app = express();
 dbConnect();
 
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors);
 app.use(helmet());
 
 
