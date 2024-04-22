@@ -5,11 +5,12 @@ import { WorkspaceService } from '../workspace.service';
 import { RouterLink } from '@angular/router';
 import { initFlowbite } from 'flowbite'
 import { AuthService } from '../auth.service';
+import { AddWorkspaceComponent } from './add-workspace/add-workspace.component';
 
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,AddWorkspaceComponent],
   templateUrl: './workspace.component.html',
 })
 export class WorkspaceComponent {

@@ -21,4 +21,11 @@ export class WorkspaceService {
         return response.data;
       })
     );
+
+  postWorkspace(credentials: { name: string; }) {
+    return this.#http.post<{ data: string, sucess: boolean }>(
+      environment.apiUrl + '/workspaces',
+      credentials
+    );
+  }
 }
