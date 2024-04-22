@@ -16,14 +16,10 @@ export class TodoComponent {
     isCompleted = false;
 
     handleClick(event: Event) {
-        console.log(event.target)
-        console.log(this.workspaceId(), this.todo()?._id)
-
         if (this.isCompleted) {
             this.#workspaceService.markAsIncomplete$(this.workspaceId(), this.todo()?._id)
                 .subscribe({
                     next: (res) => {
-                        console.log(res)
                         this.isCompleted = false;
                     }
                 });
