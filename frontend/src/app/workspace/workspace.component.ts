@@ -6,11 +6,12 @@ import { RouterLink } from '@angular/router';
 import { initFlowbite } from 'flowbite'
 import { AuthService } from '../auth.service';
 import { AddWorkspaceComponent } from './add-workspace/add-workspace.component';
+import { TodoComponent } from '../todo/todo.component';
 
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [RouterLink,AddWorkspaceComponent],
+  imports: [RouterLink, TodoComponent,AddWorkspaceComponent],
   templateUrl: './workspace.component.html',
 })
 export class WorkspaceComponent {
@@ -36,12 +37,5 @@ export class WorkspaceComponent {
 
   logout(){
     this.#auth.logout();
-  }
-
-  handleClick(event: Event) {
-    // PUT workspace/:workspaceId
-    // todoId => completedAt: true
-    this.#workspaceService.markTodoAsComplete(this.$workspaceId());
-    return false
   }
 }

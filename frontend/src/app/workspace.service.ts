@@ -28,4 +28,12 @@ export class WorkspaceService {
       credentials
     );
   }
+
+  markAsComplete$ = (workspaceId?: string, todoId?: string) => {
+    return this.#http
+      .post<StandardResponse<Workspace[]>>(
+        `${environment.apiUrl}/workspaces/${workspaceId}/todos/${todoId}/mark-complete`, 
+        {}
+      );
+  };
 }

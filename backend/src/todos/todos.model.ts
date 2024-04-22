@@ -4,7 +4,7 @@ export const todoSchema = new Schema({
     title: { type: String, required: true, trim: true },
     body: { type: String, trim: true },
     dueDate: { type: Date, required: false },
-    completed_at: { type: Date },
+    completedAt: { type: Date },
     created_by: {
         user_id: Schema.Types.ObjectId,
         email: String

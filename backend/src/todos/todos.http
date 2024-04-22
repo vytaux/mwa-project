@@ -21,3 +21,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2M
     "title": "cool title",
     "body": "nice body"
 }
+
+###
+
+# Mark todo as complete
+POST http://localhost:3000/api/v1/workspaces/6624676cf93ac5d43faf4bd5/todos/662592c7e8a612e342b89cc9/mark-complete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2MTI1YTlhMWFiZTllMDk0ZWQiLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjUyNjE0fQ.8HLmqsWSggeCH5xNkeR1-evPedfq1Bvhi1q5nijMQjM
+
+###
+
+# Mark todo as incomplete
+POST http://localhost:3000/api/v1/workspaces/6624676cf93ac5d43faf4bd5/todos/662592c7e8a612e342b89cc9/mark-incomplete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NDI2MTI1YTlhMWFiZTllMDk0ZWQiLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjUyNjE0fQ.8HLmqsWSggeCH5xNkeR1-evPedfq1Bvhi1q5nijMQjM

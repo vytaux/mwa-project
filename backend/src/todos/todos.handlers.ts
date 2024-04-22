@@ -105,3 +105,57 @@ export const deleteTodoById: RequestHandler<{ workspaceId: string, todoId: strin
         next(error);
     }
 }
+
+export const markComplete: RequestHandler<{ workspaceId: string, todoId: string }, StandardResponse<number>, Todo> = async (req, res, next) => {
+    try {
+        const { workspaceId, todoId } = req.params;
+        const userId = req.token._id;
+
+        const created = await WorkspaceModel.updateOne(
+            {
+                _id: workspaceId, 
+                $or: [
+                    { owner_id: userId },
+                    { members: { $elemMatch: { user_id: userId } } }
+                ],
+                'todos._id': todoId
+            },
+            {
+                $set: { 'todos.$.completedAt': new Date() }
+            }
+        );
+
+        console.log(created)
+
+        res.status(200).json({ success: true, data: created.modifiedCount });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const markIncomplete: RequestHandler<{ workspaceId: string, todoId: string }, StandardResponse<number>, Todo> = async (req, res, next) => {
+    try {
+        const { workspaceId, todoId } = req.params;
+        const userId = req.token._id;
+
+        const created = await WorkspaceModel.updateOne(
+            {
+                _id: workspaceId, 
+                $or: [
+                    { owner_id: userId },
+                    { members: { $elemMatch: { user_id: userId } } }
+                ],
+                'todos._id': todoId
+            },
+            {
+                $set: { 'todos.$.completedAt': null }
+            }
+        );
+
+        console.log(created)
+
+        res.status(200).json({ success: true, data: created.modifiedCount });
+    } catch (error) {
+        next(error);
+    }
+}
