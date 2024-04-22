@@ -36,4 +36,12 @@ export class WorkspaceService {
         {}
       );
   };
+
+  markAsIncomplete$ = (workspaceId?: string, todoId?: string) => {
+    return this.#http
+      .post<StandardResponse<Workspace[]>>(
+        `${environment.apiUrl}/workspaces/${workspaceId}/todos/${todoId}/mark-incomplete`, 
+        {}
+      );
+  };
 }

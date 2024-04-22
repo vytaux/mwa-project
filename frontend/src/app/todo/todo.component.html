@@ -1,5 +1,5 @@
 <li [class.line-through]="isCompleted" (click)="handleClick($event)" class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600 hover:bg-gray-100">
-    {{ todo() }}
+    {{ todo()?.body }}
 
     <!-- <div class="flex items-center ps-3"> -->
        <!-- <input id="todo-{{ todo._id }}" type="checkbox" value=""

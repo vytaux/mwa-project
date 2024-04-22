@@ -1,4 +1,4 @@
-import { Component, Input, inject, input } from '@angular/core';
+import { Component, Input, inject, input, signal } from '@angular/core';
 import { Todo } from '../data.types';
 import { WorkspaceService } from '../workspace.service';
 
@@ -13,39 +13,31 @@ export class TodoComponent {
     workspaceId = input<string>();
     todo = input<Todo>();
 
-    isCompleted = this.todo()?.completedAt ? true : false;
+    isCompleted = false;
 
     handleClick(event: Event) {
         console.log(event.target)
         console.log(this.workspaceId(), this.todo()?._id)
-        this.#workspaceService.markAsComplete$(this.workspaceId(), this.todo()?._id)
-            .subscribe({
-                next: (res) => {
-                    console.log(res)
-                    this.isCompleted = true;
-                    // this.#auth.$state.set({
-                    //   email: res.data.email,
-                    //   token: res.data.token,
-                    // });
-                    // this.router.navigate(['']);
-                }
-                // ,
-                // error: (error) => {
-                //   this.errorMessage.set(error.error.data)
-                // }
-            });
 
-        // if is complete => markAsIncomplete
-        // else markAsComplete
-        //    if success, set class Completed
-        // POST workspace/:workspaceId
-        // todoId => completedAt: true
-        // this.#workspaceService.markTodoAsComplete(this.$workspaceId(), todoId);
+        if (this.isCompleted) {
+            this.#workspaceService.markAsIncomplete$(this.workspaceId(), this.todo()?._id)
+                .subscribe({
+                    next: (res) => {
+                        console.log(res)
+                        this.isCompleted = false;
+                    }
+                });
+        } else {
+            this.#workspaceService.markAsComplete$(this.workspaceId(), this.todo()?._id)
+                .subscribe({
+                    next: (res) => {
+                        this.isCompleted = true;
+                    }
+                });
+        }
     }
 
     ngOnInit() {
-        console.log(this.todo());
-        
-        console.log(this.isCompleted)
+        this.isCompleted = this.todo()?.completedAt ? true : false;
     }
 }

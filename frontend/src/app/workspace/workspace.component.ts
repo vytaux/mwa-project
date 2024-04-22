@@ -11,7 +11,7 @@ import { TodoComponent } from '../todo/todo.component';
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [RouterLink, TodoComponent,AddWorkspaceComponent],
+  imports: [RouterLink, TodoComponent, AddWorkspaceComponent],
   templateUrl: './workspace.component.html',
 })
 export class WorkspaceComponent {
