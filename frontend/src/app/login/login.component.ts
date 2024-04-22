@@ -15,8 +15,8 @@ export class LoginComponent {
   router = inject(Router);
 
   form = inject(FormBuilder).nonNullable.group({
-    email: ['sam@gmail.com', Validators.required],
-    password: ['thispassword', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   login() {
