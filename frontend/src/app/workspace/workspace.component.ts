@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { Todo, Workspace } from '../data.types';
+import { Workspace } from '../data.types';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { WorkspaceService } from '../workspace.service';
 
 @Component({
   selector: 'app-workspace',
-  // standalone: true,
-  imports: [],
   templateUrl: './workspace.component.html',
 })
 export class WorkspaceComponent {
@@ -15,14 +14,4 @@ export class WorkspaceComponent {
     this.#workspaceService.getWorkspaces$,
     { initialValue: [] as Workspace[] }
   );
-
-  ngOnInit() {
-    this.loadData();
-  }
-
-  loadData() {
-    this.workspaceService.getWorkspaces().subscribe(data => {
-      this.$workspaces.set(data);
-    });
-  }
 }

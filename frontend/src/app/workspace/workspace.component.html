@@ -36,14 +36,17 @@
                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add New
                         +</a>
                   </li>
-                  <li>
-                     <a href="#"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">*Personal*</a>
-                  </li>
-                  <li>
-                     <a href="#"
-                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                  </li>
+
+                  @for (workspace of $workspaces(); track workspace) {
+                     <li>
+                        <a href="#"
+                           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">*Personal*</a>
+                     </li>
+                  } @empty {
+                     <li class="font-bold text-center block px-4 py-2">
+                        Damn it. No items.
+                     </li>
+                  }
                </ul>
             </div>
 
@@ -75,9 +78,9 @@
                            class="text-center mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-xl lg:text-xl dark:text-white">
                            Give Your New Workspace a Name</h1>
 
-                           <input type="text" id="workspaceName"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Workspace Name" required />
+                        <input type="text" id="workspaceName"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Workspace Name" required />
                      </div>
                      <!-- Modal footer -->
                      <div

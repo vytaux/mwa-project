@@ -28,7 +28,7 @@ export interface Token {
  
 export const initialState = {
   email: 'guest@todo.mania',
-  token: '',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NjhkOGY5M2FjNWQ0M2ZhZjRiZDciLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjYyMTcyfQ.kw03uktZrpzsC72vD66ZFGtDmdB7FWnlIEU7cOU9pBM',
 };
  
 @Injectable({
@@ -46,7 +46,7 @@ export class AuthService {
  
   login(credentials: { email: string; password: string }) {
     return this.#http.post<loginResponse>(
-      environment.apiUrl+'api/v1/login',
+      environment.apiUrl+'/login',
       credentials
     );
   }

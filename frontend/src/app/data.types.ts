@@ -9,3 +9,8 @@ export interface Workspace {
     name: string;
     tasks: Todo[];
 }
+
+export interface StandardResponse<T = unknown> {
+    success: boolean,
+    data: T;
+}
