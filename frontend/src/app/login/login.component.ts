@@ -2,8 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { BehaviorSubject } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +27,7 @@ export class LoginComponent {
   form = inject(FormBuilder).nonNullable.group({
     email: ['', Validators.required, Validators.email],
     password: ['', Validators.required],
+    confirm_password:  ['', Validators.required]
   });
 
   constructor(){
