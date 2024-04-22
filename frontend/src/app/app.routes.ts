@@ -6,8 +6,8 @@ import { AuthService } from './auth.service';
 import { inject } from '@angular/core';
 
 export const routes: Routes = [
+  { path: '', component: WorkspaceComponent, canActivate: [() => inject(AuthService).isLoggedIn()], pathMatch: 'full' },
+  { path: 'w/:workspaceId', component: WorkspaceComponent, canActivate: [() => inject(AuthService).isLoggedIn()] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'w/:workspaceId', component: WorkspaceComponent, canActivate: [() => inject(AuthService).isLoggedIn()] },
-  { path: '', component: WorkspaceComponent, canActivate: [() => inject(AuthService).isLoggedIn()] }
 ];

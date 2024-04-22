@@ -41,10 +41,13 @@ export class LoginComponent {
       .login(this.form.value as { email: string; password: string })
       .subscribe({
         next: (res) => {
+          // parse token, jwtdecode 
           this.#auth.$state.set({
             email: res.data.email,
             token: res.data.token,
           });
+          console.log(res.data)
+          console.log(this.#auth.$state());
           this.router.navigate(['/']);
         },
         error: (error) => {

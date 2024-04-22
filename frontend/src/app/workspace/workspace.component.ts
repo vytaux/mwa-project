@@ -3,7 +3,7 @@ import { Workspace } from '../data.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { WorkspaceService } from '../workspace.service';
 import { RouterLink } from '@angular/router';
-
+import { initFlowbite } from 'flowbite'
 
 @Component({
   selector: 'app-workspace',
@@ -28,6 +28,6 @@ export class WorkspaceComponent {
   });
 
   ngOnInit() {
-    console.log(this.$workspaceId())
+    initFlowbite();
   }
 }
