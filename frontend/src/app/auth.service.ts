@@ -70,6 +70,12 @@ export class AuthService {
     return this.$state().token ? true : false;
   }
 
+  logout() {
+    this.$state.set(initialState);
+    this.#router.navigate(['/login']);
+    return;
+  }
+
   canActivate(): boolean {
     if (!this.isLoggedIn()) {
       this.#router.navigate(['/login']);

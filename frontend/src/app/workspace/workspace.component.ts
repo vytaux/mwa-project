@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { WorkspaceService } from '../workspace.service';
 import { RouterLink } from '@angular/router';
 import { initFlowbite } from 'flowbite'
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-workspace',
@@ -13,6 +14,7 @@ import { initFlowbite } from 'flowbite'
 })
 export class WorkspaceComponent {
   readonly #workspaceService = inject(WorkspaceService);
+  #auth = inject(AuthService);
 
   $workspaces = toSignal(
     this.#workspaceService.getWorkspaces$,
@@ -29,5 +31,9 @@ export class WorkspaceComponent {
 
   ngOnInit() {
     initFlowbite();
+  }
+
+  logout(){
+    this.#auth.logout();
   }
 }
