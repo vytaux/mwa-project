@@ -15,7 +15,7 @@ export class TodoComponent {
 
     isCompleted = false;
 
-    handleClick(event: Event) {
+    handleCompleted(event: Event) {
         if (this.isCompleted) {
             this.#workspaceService.markAsIncomplete$(this.workspaceId(), this.todo()?._id)
                 .subscribe({
@@ -31,6 +31,16 @@ export class TodoComponent {
                     }
                 });
         }
+    }
+
+    handleDelete(event: Event) {
+        this.#workspaceService.deleteTodo$(this.workspaceId(), this.todo()?._id)
+            .subscribe({
+                next: (res) => {
+                    // TODO fix
+                    window.location.reload();
+                }
+            });
     }
 
     ngOnInit() {

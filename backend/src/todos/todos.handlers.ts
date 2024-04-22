@@ -95,7 +95,13 @@ export const deleteTodoById: RequestHandler<{ workspaceId: string, todoId: strin
         const userId = req.token._id;
 
         const results = await WorkspaceModel.updateOne(
-            { _id: workspaceId },
+            { 
+                _id: workspaceId,
+                $or: [
+                    { owner_id: userId },
+                    { members: { $elemMatch: { user_id: userId } } }
+                ]
+            },
             { $pull: { todos: { _id: todoId } } }
         );
 

@@ -44,4 +44,12 @@ export class WorkspaceService {
         {}
       );
   };
+
+  deleteTodo$ = (workspaceId?: string, todoId?: string) => {
+    return this.#http
+      .delete<StandardResponse<Workspace[]>>(
+        `${environment.apiUrl}/workspaces/${workspaceId}/todos/${todoId}`, 
+        {}
+      );
+  };
 }
