@@ -1,13 +1,13 @@
 export interface Todo {
-    id: number;
+    _id: string;
     title: string;
     body: string;
 }
 
 export interface Workspace {
-    id: number;
+    _id: string;
     name: string;
-    tasks: Todo[];
+    todos: Todo[];
 }
 
 export interface StandardResponse<T = unknown> {

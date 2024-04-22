@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, ApplicationConfig, inject } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -18,7 +18,7 @@ const bootstrap = () => {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withInterceptors([addTokenInterceptor])),
     {provide: APP_INITIALIZER, multi: true, useFactory: bootstrap}
   ],

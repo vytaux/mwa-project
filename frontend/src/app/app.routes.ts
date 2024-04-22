@@ -5,7 +5,8 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { AuthService } from './auth.service';
 
 export const routes: Routes = [
-    { path: '', component: WorkspaceComponent, canActivate: [AuthService], pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-  ];
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'w/:workspaceId', component: WorkspaceComponent, canActivate: [AuthService] },
+  { path: '', component: WorkspaceComponent, canActivate: [AuthService] }
+];
