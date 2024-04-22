@@ -67,21 +67,15 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return true;
     return this.$state().token ? true : false;
   }
 
-  // canActivate(): boolean {
-  //   console.log('guard');
+  canActivate(): boolean {
+    if (!this.isLoggedIn()) {
+      this.#router.navigate(['/login']);
+      return false;
+    }
 
-  //   // TODO fix and remove
-  //   return true;
-  //   const isLoggedIn = !!localStorage.getItem('token');
-
-  //   if (!isLoggedIn) {
-  //     this.#router.navigate(['/login']);
-  //   }
-
-  //   return isLoggedIn;
-  // }
+    return true;
+  }
 }

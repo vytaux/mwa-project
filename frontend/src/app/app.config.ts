@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 const bootstrap = () => {
   const auth = inject(AuthService);
   return () => {
-    const local_state = localStorage.getItem('DUMMY_STATE');
+    const local_state = localStorage.getItem('State');
     if(local_state){
       auth.$state.set(JSON.parse(local_state));
     }
