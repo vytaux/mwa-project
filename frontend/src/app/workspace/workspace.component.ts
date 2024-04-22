@@ -1,4 +1,4 @@
-import { Component, Input, computed, inject, input, signal } from '@angular/core';
+import { Component, Input, computed, inject, input } from '@angular/core';
 import { Workspace } from '../data.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { WorkspaceService } from '../workspace.service';
@@ -33,7 +33,15 @@ export class WorkspaceComponent {
     initFlowbite();
   }
 
+<<<<<<< Updated upstream
   logout(){
     this.#auth.logout();
+=======
+  handleClick(event: Event) {
+    // PUT workspace/:workspaceId
+    // todoId => completedAt: true
+    this.#workspaceService.markTodoAsComplete(this.$workspaceId());
+    return false
+>>>>>>> Stashed changes
   }
 }

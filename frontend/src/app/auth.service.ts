@@ -46,7 +46,7 @@ export class AuthService {
   #router = inject(Router);
   $state = signal<State>(initialState);
 
-  constructor(router: Router) {
+  constructor() {
     effect(() => {
       localStorage.setItem('State', JSON.stringify(this.$state()));
     });
