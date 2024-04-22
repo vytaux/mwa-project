@@ -4,7 +4,7 @@ import { User, UserModel } from "./users.model";
 import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-export const loginHandler: RequestHandler<unknown, StandardResponse<string>, { email: string, password: string }> = async (req, res, next) => {
+export const loginHandler: RequestHandler<unknown, StandardResponse<{ email: string, token: string }>, { email: string, password: string }> = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         const user = await UserModel.findOne({ email });
@@ -28,8 +28,8 @@ export const loginHandler: RequestHandler<unknown, StandardResponse<string>, { e
             email: user.email
         }, process.env.PRIVATE_KEY)
 
-        res.status(200).json({ success: true, data: jwt });
-    
+        res.status(200).json({ success: true, data: { email: user.email, token: jwt } });
+
     } catch (error) {
         next(error);
     }

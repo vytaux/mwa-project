@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { StandardResponse } from "../helpers/types";
-import { Todo, TodoModel } from "./todos.model";
+import { Todo } from "./todos.model";
 import { WorkspaceModel } from "../workspaces/workspaces.model";
 
 export const getTodos: RequestHandler<{ workspaceId: string }, StandardResponse<any>, unknown, { page: number; }> = async (req, res, next) => {
