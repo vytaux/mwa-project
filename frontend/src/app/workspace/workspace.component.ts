@@ -19,20 +19,15 @@ export class WorkspaceComponent {
     { initialValue: [] as Workspace[] }
   );
 
-  @Input({
-    alias: "workspaceId",
-  })
-  $workspaceId = signal('');
+  $workspaceId = input<string>('', { alias: 'workspaceId' });
   
   $workspace = computed(() => {
-    console.log('asd')
-    console.log(this.$workspaceId())
-    // return this.$workspaces().find(workspace => {
-    //   workspace._id === this.$workspaceId();
-    // });
+    return this.$workspaces().find(workspace => {
+      return workspace._id === this.$workspaceId();
+    });
   });
 
   ngOnInit() {
-    console.log(this.$workspaceId)
+    console.log(this.$workspaceId())
   }
 }

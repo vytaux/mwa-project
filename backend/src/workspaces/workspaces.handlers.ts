@@ -16,7 +16,7 @@ export const getWorkspaces: RequestHandler<unknown, StandardResponse<Workspace[]
                     { members: { $elemMatch: { user_id: userId } } }
                 ]
             },
-            { _id: 1, name: 1 })
+            { _id: 1, name: 1, todos: 1 })
             .skip((page - 1) * pageSize)
             .limit(pageSize);
 
