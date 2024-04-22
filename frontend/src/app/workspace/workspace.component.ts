@@ -33,15 +33,14 @@ export class WorkspaceComponent {
     initFlowbite();
   }
 
-<<<<<<< Updated upstream
   logout(){
     this.#auth.logout();
-=======
+  }
+
   handleClick(event: Event) {
     // PUT workspace/:workspaceId
     // todoId => completedAt: true
     this.#workspaceService.markTodoAsComplete(this.$workspaceId());
     return false
->>>>>>> Stashed changes
   }
 }
