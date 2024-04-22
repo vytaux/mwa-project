@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
+  #title = inject(Title);
   #auth = inject(AuthService);
   router = inject(Router);
   message = signal<string>("");
@@ -30,6 +32,7 @@ export class RegisterComponent {
     if (this.#auth.isLoggedIn()) {
       this.router.navigate(['/']);
     }
+    this.#title.setTitle('Register');
   }
 
   register() {

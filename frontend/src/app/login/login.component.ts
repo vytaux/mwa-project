@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ import { AuthService } from '../auth.service';
 })
 
 export class LoginComponent {
+  #title = inject(Title);
   #auth = inject(AuthService);
   router = inject(Router);
   errorMessage = signal<string>("");
@@ -33,6 +35,7 @@ export class LoginComponent {
     if (this.#auth.isLoggedIn()) {
       this.router.navigate(['']);
     }
+    this.#title.setTitle('Login');
   }
 
   login() {
