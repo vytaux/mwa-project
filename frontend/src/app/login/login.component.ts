@@ -25,13 +25,12 @@ export class LoginComponent {
   errorMessage = signal<string>("");
 
   form = inject(FormBuilder).nonNullable.group({
-    email: ['', Validators.required, Validators.email],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    confirm_password:  ['', Validators.required]
   });
 
-  constructor(){
-    if(this.#auth.isLoggedIn()){
+  constructor() {
+    if (this.#auth.isLoggedIn()) {
       this.router.navigate(['/']);
     }
   }

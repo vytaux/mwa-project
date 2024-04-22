@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -15,10 +15,16 @@ export class RegisterComponent {
   message = signal<string>("");
 
   form = inject(FormBuilder).nonNullable.group({
-    email: ['', Validators.required, Validators.email],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     confirm_password: ['', Validators.required],
-  });
+  }, { validators: this.match_password });
+
+  match_password(control: AbstractControl) {
+    return control.get('password')?.value === control.get('confirm_password')?.value
+      ? null
+      : { mismatch: true }
+  }
 
   constructor() {
     if (this.#auth.isLoggedIn()) {
@@ -35,7 +41,8 @@ export class RegisterComponent {
           this.message.set('Account Created Sucessfully! Proceed to login')
         },
         error: (error) => {
-          this.message.set(error.error.data)
+          console.log(error);
+          this.message.set("Couldn't create an account. Please try again!")
         }
       });
   }
