@@ -10,7 +10,7 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
+            <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600 border-b">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                     Add a member to this workspace
                 </h3>
@@ -28,7 +28,7 @@
             <!-- Modal body -->
             <form [formGroup]="form" (ngSubmit)="addMember()">
 
-                <p class="px-5">
+                <p class="px-5 mt-3">
                     Members:
                     @if (workspace()?.members?.length === 0) {
                     <span>No members yet</span>
