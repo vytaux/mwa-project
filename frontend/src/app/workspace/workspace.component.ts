@@ -7,11 +7,12 @@ import { initFlowbite } from 'flowbite'
 import { AuthService } from '../auth.service';
 import { AddWorkspaceComponent } from './add-workspace/add-workspace.component';
 import { TodoComponent } from '../todo/todo.component';
+import { AddTodoComponent } from '../todo/add-todo/add-todo.component';
 
 @Component({
   selector: 'app-workspace',
   standalone: true,
-  imports: [RouterLink, TodoComponent, AddWorkspaceComponent],
+  imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent],
   templateUrl: './workspace.component.html',
 })
 export class WorkspaceComponent {

@@ -48,8 +48,13 @@ export class WorkspaceService {
   deleteTodo$ = (workspaceId?: string, todoId?: string) => {
     return this.#http
       .delete<StandardResponse<Workspace[]>>(
-        `${environment.apiUrl}/workspaces/${workspaceId}/todos/${todoId}`, 
-        {}
+        `${environment.apiUrl}/workspaces/${workspaceId}/todos/${todoId}`
       );
   };
+
+  postTodo$(workspaceId: string, body: string) {
+    const url = `${environment.apiUrl}/workspaces/${workspaceId}/todos`;
+
+    return this.#http.post<StandardResponse<number>>(url, { body });
+  }
 }

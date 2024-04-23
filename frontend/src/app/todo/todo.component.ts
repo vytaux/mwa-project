@@ -34,11 +34,16 @@ export class TodoComponent {
     }
 
     handleDelete(event: Event) {
+        event.stopPropagation();
+
         this.#workspaceService.deleteTodo$(this.workspaceId(), this.todo()?._id)
             .subscribe({
-                next: (res) => {
+                next: () => {
                     // TODO fix
                     window.location.reload();
+                },
+                error: (error) => {
+                    console.error("Couldn't delete the todo", error);
                 }
             });
     }
