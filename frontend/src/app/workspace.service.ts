@@ -63,4 +63,10 @@ export class WorkspaceService {
     
     return this.#http.delete<StandardResponse<number>>(url);
   }
+
+  addMember$(workspaceId: string, email: string) {
+    const url = `${environment.apiUrl}/workspaces/${workspaceId}/addMember`;
+
+    return this.#http.post<StandardResponse<number>>(url, { email });
+  }
 }

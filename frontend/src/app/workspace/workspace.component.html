@@ -28,7 +28,10 @@
 
 <div class="p-4 sm:ml-64 mt-14">
 
-   <app-add-todo [workspaceId]="$workspaceId()" />
+   <div class="flex justify-between mb-3">
+      <app-add-todo [workspaceId]="$workspaceId()" />
+      <app-add-member [workspaceId]="$workspaceId()" [workspace]="$workspace()"/>
+   </div>
 
    @for (todo of $workspace()?.todos; track todo) {
    <ul

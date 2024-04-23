@@ -5,10 +5,16 @@ export interface Todo {
     completedAt: Date;
 }
 
+export interface Member {
+    _id: string;
+    email: string;
+}
+
 export interface Workspace {
     _id: string;
     name: string;
     todos: Todo[];
+    members: Member[];
 }
 
 export interface StandardResponse<T = unknown> {

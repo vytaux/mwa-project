@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { StandardResponse } from "../helpers/types";
 import { Workspace, WorkspaceModel } from "../workspaces/workspaces.model";
+import { UserModel } from "../users/users.model";
 
 export const getWorkspaces: RequestHandler<unknown, StandardResponse<Workspace[]>, unknown, { page: number; }> = async (req, res, next) => {
     try {
@@ -16,7 +17,7 @@ export const getWorkspaces: RequestHandler<unknown, StandardResponse<Workspace[]
                     { members: { $elemMatch: { user_id: userId } } }
                 ]
             },
-            { _id: 1, name: 1, todos: 1 })
+            { _id: 1, name: 1, todos: 1, members: 1 })
             .skip((page - 1) * pageSize)
             .limit(pageSize);
 
@@ -101,11 +102,17 @@ export const addMemberToWorkspace: RequestHandler<{ workspaceId: string }, Stand
     try {
         const workspaceId = req.params.workspaceId;
         const userId = req.token._id;
-        const { user_id, email } = req.body;
+        const email = req.body.email;
+
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            throw new Error("User not found");
+        }
 
         const memberAdded = await WorkspaceModel.updateOne(
             { _id: workspaceId, 'owner_id': userId },
-            { $addToSet: { members: { user_id, email } } }
+            { $addToSet: { members: { user_id: user._id, email } } }
         );
 
         if (memberAdded.modifiedCount < 1) {
