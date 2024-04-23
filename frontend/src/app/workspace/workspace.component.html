@@ -13,7 +13,7 @@
             </button>
          </li>
 
-         @for (workspace of $workspaces(); track workspace) {
+         @for (workspace of workspaceService.$readWriteWorkspaces(); track workspace) {
          <li>
             <a [routerLink]="['/w', workspace._id]"
                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">              

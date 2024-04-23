@@ -13,21 +13,43 @@ export class TodoComponent {
     workspaceId = input<string>();
     todo = input<Todo>();
 
-    isCompleted = false;
-
     handleCompleted(event: Event) {
-        if (this.isCompleted) {
+        if (this.todo()?.completedAt != null) {
             this.#workspaceService.markAsIncomplete$(this.workspaceId(), this.todo()?._id)
                 .subscribe({
                     next: (res) => {
-                        this.isCompleted = false;
+                        this.#workspaceService.$readWriteWorkspaces.update((workspaces) => {
+                            return workspaces.map(workspace => {
+                                if (workspace._id === this.workspaceId()) {
+                                    workspace.todos.map(todo => {
+                                        if (todo._id === this.todo()?._id) {
+                                            todo.completedAt = null;
+                                        }
+                                        return todo;
+                                    });
+                                }
+                                return workspace;
+                            });
+                        });
                     }
                 });
         } else {
             this.#workspaceService.markAsComplete$(this.workspaceId(), this.todo()?._id)
                 .subscribe({
                     next: (res) => {
-                        this.isCompleted = true;
+                        this.#workspaceService.$readWriteWorkspaces.update((workspaces) => {
+                            return workspaces.map(workspace => {
+                                if (workspace._id === this.workspaceId()) {
+                                    workspace.todos.map(todo => {
+                                        if (todo._id === this.todo()?._id) {
+                                            todo.completedAt = new Date();
+                                        }
+                                        return todo;
+                                    });
+                                }
+                                return workspace;
+                            });
+                        });
                     }
                 });
         }
@@ -46,9 +68,5 @@ export class TodoComponent {
                     console.error("Couldn't delete the todo", error);
                 }
             });
-    }
-
-    ngOnInit() {
-        this.isCompleted = this.todo()?.completedAt ? true : false;
     }
 }

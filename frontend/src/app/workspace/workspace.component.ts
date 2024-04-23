@@ -1,4 +1,4 @@
-import { Component, Input, computed, inject, input } from '@angular/core';
+import { Component, Input, computed, inject, input, signal } from '@angular/core';
 import { Workspace } from '../data.types';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { WorkspaceService } from '../workspace.service';
@@ -18,20 +18,29 @@ import { AddMemberComponent } from "../add-member/add-member.component";
     imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent, HeaderComponent, AddMemberComponent]
 })
 export class WorkspaceComponent {
-  readonly #workspaceService = inject(WorkspaceService);
+  readonly workspaceService = inject(WorkspaceService);
 
-  $workspaces = toSignal(
-    this.#workspaceService.getWorkspaces$,
-    { initialValue: [] as Workspace[] }
-  );
+  // $workspaces = toSignal(
+  //   this.#workspaceService.getWorkspaces$,
+  //   { initialValue: [] as Workspace[] }
+  // );
 
   $workspaceId = input<string>('', { alias: 'workspaceId' });
 
   $workspace = computed(() => {
-    return this.$workspaces().find(workspace => {
+    return this.workspaceService.$readWriteWorkspaces().find(workspace => {
       return workspace._id === this.$workspaceId();
     });
   });
+
+  constructor() {
+    this.workspaceService.getWorkspaces$
+      .subscribe({
+        next: (workspaces: Workspace[]) => {
+          this.workspaceService.$readWriteWorkspaces.set(workspaces);
+        }
+      });
+  }
 
   ngOnInit() {
     initFlowbite();
@@ -40,7 +49,7 @@ export class WorkspaceComponent {
   handleDeleteWorkspace(event: Event) {
     event.stopPropagation();
 
-    this.#workspaceService.deleteWorkspace$(this.$workspaceId())
+    this.workspaceService.deleteWorkspace$(this.$workspaceId())
       .subscribe({
         next: (res) => {
           if (res.success) {

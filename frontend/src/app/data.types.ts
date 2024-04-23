@@ -2,7 +2,7 @@ export interface Todo {
     _id: string;
     title: string;
     body: string;
-    completedAt: Date;
+    completedAt: Date | null;
 }
 
 export interface Member {

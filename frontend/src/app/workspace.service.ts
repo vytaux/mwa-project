@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { environment } from '../environments/environment.development'
 import { StandardResponse, Workspace } from './data.types';
 import { map } from 'rxjs';
@@ -9,6 +9,14 @@ import { map } from 'rxjs';
 })
 export class WorkspaceService {
   readonly #http = inject(HttpClient);
+
+  $readWriteWorkspaces = signal<Workspace[]>([]);
+
+  constructor() {
+    effect(() => {
+      console.log(this.$readWriteWorkspaces());
+    });
+  }
 
   getWorkspaces$ = this.#http
     .get<StandardResponse<Workspace[]>>(environment.apiUrl + '/workspaces')
