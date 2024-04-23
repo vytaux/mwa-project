@@ -8,7 +8,7 @@ html, body, app-root, app-homepage {
     display: block;
 }
 
-app-homepage {
+app-homepage, app-workspace {
     display: flex;
     flex-direction: column;
 }
