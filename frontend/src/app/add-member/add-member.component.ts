@@ -2,6 +2,7 @@ import { Component, SimpleChanges, inject, input, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WorkspaceService } from '../workspace.service';
 import { Workspace } from '../data.types';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-add-member',
@@ -40,5 +41,9 @@ export class AddMemberComponent {
       .join(', ');
 
     return membersCommaSeparated as string;
+  }
+
+  ngOnInit() {
+    initFlowbite();
   }
 }
