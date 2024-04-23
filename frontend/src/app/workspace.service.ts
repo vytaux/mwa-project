@@ -71,4 +71,10 @@ export class WorkspaceService {
 
     return this.#http.post<StandardResponse<number>>(url, { email });
   }
+
+  removeMember$(workspaceId: string, email: string) {
+    const url = `${environment.apiUrl}/workspaces/${workspaceId}/removeMember`;
+    
+    return this.#http.post<StandardResponse<number>>(url, { email });
+  }
 }

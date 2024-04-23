@@ -55,6 +55,7 @@ export const postWorkspace: RequestHandler<unknown, StandardResponse<string>, Wo
         const created = await WorkspaceModel.create({
             ...newWorkspace,
             owner_id: _id,
+            members:[]
         });
 
         res.status(200).json({ success: true, data: created._id.toString() });
@@ -100,7 +101,7 @@ export const deleteWorkspaceById: RequestHandler<{ workspaceId: string }, Standa
     }
 }
 
-export const addMemberToWorkspace: RequestHandler<{ workspaceId: string }, StandardResponse<number>, { user_id: string, email: string }> = async (req, res, next) => {
+export const addMemberToWorkspace: RequestHandler<{ workspaceId: string }, StandardResponse<number>, { email: string }> = async (req, res, next) => {
     try {
         const workspaceId = req.params.workspaceId;
         const userId = req.token._id;
@@ -127,15 +128,17 @@ export const addMemberToWorkspace: RequestHandler<{ workspaceId: string }, Stand
     }
 }
 
-export const removeMemberFromWorkspace: RequestHandler<{ workspaceId: string }, StandardResponse<number>, { user_id: string, email: string }> = async (req, res, next) => {
+export const removeMemberFromWorkspace: RequestHandler<{ workspaceId: string }, StandardResponse<number>, { email: string }> = async (req, res, next) => {
     try {
         const workspaceId = req.params.workspaceId;
         const userId = req.token._id;
-        const { user_id, email } = req.body;
+        const { email } = req.body;
+
+        const user = await UserModel.findOne({ email });
 
         const memberAdded = await WorkspaceModel.updateOne(
             { _id: workspaceId, 'owner_id': userId },
-            { $pull: { members: { user_id: user_id } } }
+            { $pull: { members: { user_id: user?._id } } }
         );
 
         if (memberAdded.modifiedCount < 1) {

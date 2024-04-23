@@ -4,8 +4,9 @@ import { todoSchema } from "../todos/todos.model";
 const workspaceSchema = new Schema({
     name: { type: String, required: true, unique: true },
     owner_id: { type: Schema.Types.ObjectId },
-    members: [{ 
-        user_id: String,
+    members: [{
+        _id: false,
+        user_id: { type: String},
         email: String
     }],
     todos: [todoSchema],
