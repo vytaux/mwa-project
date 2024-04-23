@@ -13,6 +13,9 @@ export class TodoComponent {
     workspaceId = input<string>();
     todo = input<Todo>();
 
+    last = input<boolean>();
+    first = input<boolean>();
+
     handleCompleted(event: Event) {
         if (this.todo()?.completedAt != null) {
             this.#workspaceService.markAsIncomplete$(this.workspaceId(), this.todo()?._id)

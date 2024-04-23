@@ -20,11 +20,6 @@ import { AddMemberComponent } from "../add-member/add-member.component";
 export class WorkspaceComponent {
   readonly workspaceService = inject(WorkspaceService);
 
-  // $workspaces = toSignal(
-  //   this.#workspaceService.getWorkspaces$,
-  //   { initialValue: [] as Workspace[] }
-  // );
-
   $workspaceId = input<string>('', { alias: 'workspaceId' });
 
   $workspace = computed(() => {

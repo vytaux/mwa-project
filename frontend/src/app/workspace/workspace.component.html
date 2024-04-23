@@ -16,7 +16,7 @@
          @for (workspace of workspaceService.$readWriteWorkspaces(); track workspace) {
          <li>
             <a [routerLink]="['/w', workspace._id]"
-               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">              
+               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <span class="ms-3">{{ workspace.name }}</span>
                <a (click)="handleDeleteWorkspace($event)" class="text-sm ml-auto hover:underline">Delete</a>
             </a>
@@ -30,14 +30,17 @@
 
    <div class="flex justify-between mb-3">
       <app-add-todo [workspaceId]="$workspaceId()" />
-      <app-add-member [workspaceId]="$workspaceId()" [workspace]="$workspace()"/>
+      <app-add-member [workspaceId]="$workspaceId()" [workspace]="$workspace()" />
    </div>
 
-   @for (todo of $workspace()?.todos; track todo) {
-   <ul
-      class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      <app-todo [workspaceId]="$workspaceId()" [todo]="todo" />
-   </ul>
+   @if ($workspace()?.todos) {
+      <ul
+         class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+         @for (todo of $workspace()?.todos; track todo; let last = $last, first = $first) {
+            <app-todo [workspaceId]="$workspaceId()" [todo]="todo" [first]="first" [last]="last" />
+         }
+      </ul>
    }
+
 </div>
 <app-add-workspace />
