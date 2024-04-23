@@ -14,15 +14,36 @@
          </li>
 
          @for (workspace of workspaceService.$readWriteWorkspaces(); track workspace) {
-            @if (!workspace.isDefault) {
-               <li>
-                  <a [routerLink]="['/w', workspace._id]"
-                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                     <span class="ms-3">{{ workspace.name }}</span>
-                     <a [attr.data-workspaceId]="workspace._id" (click)="handleDeleteWorkspace($event)" class="text-sm ml-auto hover:underline">Delete</a>
-                  </a>
-               </li>
-            }
+         @if (!workspace.isDefault) {
+         <li>
+            <a [routerLink]="['/w', workspace._id]"
+               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <span class="ms-3">{{ workspace.name }}</span>
+               <a [attr.data-workspaceId]="workspace._id" (click)="handleDeleteWorkspace($event)"
+                  class="text-sm ml-auto hover:underline">
+                  <svg width="15px" height="17px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                     fill="#000000">
+                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                     <g id="SVGRepo_iconCarrier">
+                        <path fill="var(--ci-primary-color, #000000)"
+                           d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"
+                           class="ci-primary"></path>
+                        <rect width="32" height="200" x="168" y="216" fill="var(--ci-primary-color, #000000)"
+                           class="ci-primary"></rect>
+                        <rect width="32" height="200" x="240" y="216" fill="var(--ci-primary-color, #000000)"
+                           class="ci-primary"></rect>
+                        <rect width="32" height="200" x="312" y="216" fill="var(--ci-primary-color, #000000)"
+                           class="ci-primary"></rect>
+                        <path fill="var(--ci-primary-color, #000000)"
+                           d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"
+                           class="ci-primary"></path>
+                     </g>
+                  </svg>
+               </a>
+            </a>
+         </li>
+         }
          }
       </ul>
    </div>
@@ -35,17 +56,17 @@
 
       <!-- Add member should only be valid for non-default (private) workspaces -->
       @if (!$workspace()?.isDefault) {
-         <app-add-member [workspaceId]="workspaceId()" [workspace]="$workspace()" />
+      <app-add-member [workspaceId]="workspaceId()" [workspace]="$workspace()" />
       }
    </div>
 
    @if ($workspace()?.todos?.length) {
-      <ul
-         class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-         @for (todo of $workspace()?.todos; track todo; let last = $last, first = $first) {
-            <app-todo [workspaceId]="workspaceId()" [todo]="todo" [first]="first" [last]="last" />
-         }
-      </ul>
+   <ul
+      class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      @for (todo of $workspace()?.todos; track todo; let last = $last, first = $first) {
+      <app-todo [workspaceId]="workspaceId()" [todo]="todo" [first]="first" [last]="last" />
+      }
+   </ul>
    }
 
 </div>
