@@ -8,7 +8,8 @@ const workspaceSchema = new Schema({
         user_id: String,
         email: String
     }],
-    todos: [todoSchema]
+    todos: [todoSchema],
+    isPrivate: { type: Boolean, default: false },
 }, { versionKey: false });
 
 export type Workspace = InferSchemaType<typeof workspaceSchema>;

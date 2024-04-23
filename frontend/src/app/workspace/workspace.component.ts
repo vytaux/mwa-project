@@ -11,14 +11,13 @@ import { AddTodoComponent } from '../todo/add-todo/add-todo.component';
 import { HeaderComponent } from "../header/header.component";
 
 @Component({
-    selector: 'app-workspace',
-    standalone: true,
-    templateUrl: './workspace.component.html',
-    imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent, HeaderComponent]
+  selector: 'app-workspace',
+  standalone: true,
+  templateUrl: './workspace.component.html',
+  imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent, HeaderComponent]
 })
 export class WorkspaceComponent {
   readonly #workspaceService = inject(WorkspaceService);
-  #auth = inject(AuthService);
 
   $workspaces = toSignal(
     this.#workspaceService.getWorkspaces$,
@@ -26,7 +25,7 @@ export class WorkspaceComponent {
   );
 
   $workspaceId = input<string>('', { alias: 'workspaceId' });
-  
+
   $workspace = computed(() => {
     return this.$workspaces().find(workspace => {
       return workspace._id === this.$workspaceId();
@@ -35,5 +34,21 @@ export class WorkspaceComponent {
 
   ngOnInit() {
     initFlowbite();
+  }
+
+  handleDeleteWorkspace(event: Event) {
+    event.stopPropagation();
+
+    this.#workspaceService.deleteWorkspace$(this.$workspaceId())
+      .subscribe({
+        next: (res) => {
+          if (res.success) {
+            window.location.reload();
+          }
+        },
+        error: (error) => {
+          console.error("Couldn't delete the workspace", error);
+        }
+      });
   }
 }

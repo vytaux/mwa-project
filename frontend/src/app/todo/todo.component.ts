@@ -33,7 +33,7 @@ export class TodoComponent {
         }
     }
 
-    handleDelete(event: Event) {
+    handleDeleteTodo(event: Event) {
         event.stopPropagation();
 
         this.#workspaceService.deleteTodo$(this.workspaceId(), this.todo()?._id)

@@ -57,4 +57,10 @@ export class WorkspaceService {
 
     return this.#http.post<StandardResponse<number>>(url, { body });
   }
+
+  deleteWorkspace$(workspaceId: string) {
+    const url = `${environment.apiUrl}/workspaces/${workspaceId}`;
+    
+    return this.#http.delete<StandardResponse<number>>(url);
+  }
 }
