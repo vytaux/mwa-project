@@ -3,8 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Title } from '@angular/platform-browser';
-import { JwtPayload, jwtDecode } from 'jwt-decode';
-import { AppJwtPayload } from '../data.types';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
