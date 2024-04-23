@@ -12,12 +12,6 @@ export class WorkspaceService {
 
   $readWriteWorkspaces = signal<Workspace[]>([]);
 
-  constructor() {
-    effect(() => {
-      console.log(this.$readWriteWorkspaces());
-    });
-  }
-
   getWorkspaces$ = this.#http
     .get<StandardResponse<Workspace[]>>(environment.apiUrl + '/workspaces')
     .pipe(
