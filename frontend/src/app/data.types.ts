@@ -1,3 +1,5 @@
+import { JwtPayload } from "jwt-decode";
+
 export interface Todo {
     _id: string;
     title: string;
@@ -15,6 +17,8 @@ export interface Workspace {
     name: string;
     todos: Todo[];
     members: Member[];
+    isDefault: boolean;
+    owner_id: string;
 }
 
 export interface StandardResponse<T = unknown> {

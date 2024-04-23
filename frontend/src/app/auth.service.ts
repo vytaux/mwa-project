@@ -23,6 +23,7 @@ export interface registerResponse {
 }
 
 export interface State {
+  userId: string;
   email: string;
   token: string;
 }
@@ -32,6 +33,7 @@ export interface Token {
 }
 
 export const initialState = {
+  userId: "",
   email: "", 
   // email: 'guest@todo.mania',
   token: ""

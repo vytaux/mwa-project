@@ -29,15 +29,15 @@
 <div class="p-4 sm:ml-64 mt-14">
 
    <div class="flex justify-between mb-3">
-      <app-add-todo [workspaceId]="$workspaceId()" />
-      <app-add-member [workspaceId]="$workspaceId()" [workspace]="$workspace()" />
+      <app-add-todo [workspaceId]="workspaceId()" />
+      <app-add-member [workspaceId]="workspaceId()" [workspace]="$workspace()" />
    </div>
 
    @if ($workspace()?.todos) {
       <ul
          class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
          @for (todo of $workspace()?.todos; track todo; let last = $last, first = $first) {
-            <app-todo [workspaceId]="$workspaceId()" [todo]="todo" [first]="first" [last]="last" />
+            <app-todo [workspaceId]="workspaceId()" [todo]="todo" [first]="first" [last]="last" />
          }
       </ul>
    }

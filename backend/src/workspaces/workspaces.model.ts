@@ -9,7 +9,7 @@ const workspaceSchema = new Schema({
         email: String
     }],
     todos: [todoSchema],
-    isPrivate: { type: Boolean, default: false },
+    isDefault: { type: Boolean, default: false },
 }, { versionKey: false });
 
 export type Workspace = InferSchemaType<typeof workspaceSchema>;

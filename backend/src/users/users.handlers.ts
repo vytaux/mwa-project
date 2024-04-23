@@ -3,6 +3,7 @@ import { ErrorWithStatus, StandardResponse } from "../helpers/types";
 import { User, UserModel } from "./users.model";
 import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
+import { WorkspaceModel } from "../workspaces/workspaces.model";
 
 export const loginHandler: RequestHandler<unknown, StandardResponse<{ email: string, token: string }>, { email: string, password: string }> = async (req, res, next) => {
     try {
@@ -42,6 +43,13 @@ export const registerHandler: RequestHandler<unknown, StandardResponse<boolean>,
         const results = await UserModel.create({
             ...newUser,
             password: hashedPassword
+        });
+
+        // Create a default workspace for user
+        await WorkspaceModel.create({
+            name: 'My Workspace',
+            owner_id: results._id,
+            isDefault: true
         });
 
         res.status(200).json({ success: true, data: true });

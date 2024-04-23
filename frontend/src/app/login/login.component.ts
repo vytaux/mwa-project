@@ -3,6 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Title } from '@angular/platform-browser';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { AppJwtPayload } from '../data.types';
 
 @Component({
   selector: 'app-login',
@@ -44,10 +46,14 @@ export class LoginComponent {
       .login(this.form.value as { email: string; password: string })
       .subscribe({
         next: (res) => {
+          const decoded = jwtDecode<{ _id: string, email: string }>(res.data.token);
+
           this.#auth.$state.set({
-            email: res.data.email,
+            email: decoded.email,
+            userId: decoded._id,
             token: res.data.token,
           });
+          
           this.router.navigate(['']);
         },
         error: (error) => {
