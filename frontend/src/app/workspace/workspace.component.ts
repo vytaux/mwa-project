@@ -10,6 +10,7 @@ import { HeaderComponent } from "../header/header.component";
 import { AddMemberComponent } from "../add-member/add-member.component";
 import { AuthService } from '../auth.service';
 import { FooterComponent } from "../footer/footer.component";
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-workspace',
@@ -22,6 +23,7 @@ export class WorkspaceComponent {
   readonly #authService = inject(AuthService);
   routeSnapshot = inject(ActivatedRoute)
   router = inject(Router)
+  #title = inject(Title);
 
   workspaceId = model<string>('');
 
@@ -33,6 +35,7 @@ export class WorkspaceComponent {
   });
 
   constructor() {
+    this.#title.setTitle('Todo Mania | Workspaces');
     const userId = this.#authService.$state().userId;
 
     this.workspaceService.getWorkspaces$
