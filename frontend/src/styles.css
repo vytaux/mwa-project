@@ -2,3 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body, app-root, app-homepage {
+    height: 100%;
+    display: block;
+}
+
+app-homepage {
+    display: flex;
+    flex-direction: column;
+}
