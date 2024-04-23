@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WorkspaceService } from '../../workspace.service';
 
 @Component({
-  selector: 'add-todo',
+  selector: 'app-add-todo',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './add-todo.component.html',

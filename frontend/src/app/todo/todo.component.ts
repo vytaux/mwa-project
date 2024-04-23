@@ -3,7 +3,7 @@ import { Todo } from '../data.types';
 import { WorkspaceService } from '../workspace.service';
 
 @Component({
-    selector: 'todo',
+    selector: 'app-todo',
     standalone: true,
     templateUrl: './todo.component.html'
 })

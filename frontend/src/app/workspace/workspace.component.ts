@@ -8,12 +8,13 @@ import { AuthService } from '../auth.service';
 import { AddWorkspaceComponent } from './add-workspace/add-workspace.component';
 import { TodoComponent } from '../todo/todo.component';
 import { AddTodoComponent } from '../todo/add-todo/add-todo.component';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
-  selector: 'app-workspace',
-  standalone: true,
-  imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent],
-  templateUrl: './workspace.component.html',
+    selector: 'app-workspace',
+    standalone: true,
+    templateUrl: './workspace.component.html',
+    imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent, HeaderComponent]
 })
 export class WorkspaceComponent {
   readonly #workspaceService = inject(WorkspaceService);
@@ -34,9 +35,5 @@ export class WorkspaceComponent {
 
   ngOnInit() {
     initFlowbite();
-  }
-
-  logout(){
-    this.#auth.logout();
   }
 }
