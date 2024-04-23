@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, model } from '@angular/core';
 import { Workspace } from '../data.types';
 import { WorkspaceService } from '../workspace.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, RouterLink } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLink } from '@angular/router';
 import { initFlowbite } from 'flowbite'
 import { AddWorkspaceComponent } from './add-workspace/add-workspace.component';
 import { TodoComponent } from '../todo/todo.component';
@@ -20,6 +20,7 @@ export class WorkspaceComponent {
   readonly workspaceService = inject(WorkspaceService);
   readonly #authService = inject(AuthService);
   routeSnapshot = inject(ActivatedRoute)
+  router = inject(Router)
 
   workspaceId = model<string>('');
 
@@ -43,15 +44,15 @@ export class WorkspaceComponent {
           this.workspaceService.$readWriteWorkspaces().find(workspace => {
             // Find the default workspace if the workspaceId is empty
             if (this.workspaceId() === undefined) {
-               const foundUsersDefaultWorkspace = workspace.isDefault && workspace.owner_id === userId
-      
+              const foundUsersDefaultWorkspace = workspace.isDefault && workspace.owner_id === userId
+
               if (foundUsersDefaultWorkspace) {
                 this.workspaceId.set(workspace._id);
                 return true;
-              } 
+              }
               return false;
-            } 
-              
+            }
+
             // Filter by workspace by selectedId otherwise
             return workspace._id === this.workspaceId();
           });
@@ -66,16 +67,24 @@ export class WorkspaceComponent {
   handleDeleteWorkspace(event: Event) {
     event.stopPropagation();
 
-    this.workspaceService.deleteWorkspace$(this.workspaceId())
+    const target = event.target as HTMLElement;
+    const workspaceId = target.getAttribute('data-workspaceId');
+
+    this.workspaceService.deleteWorkspace$(workspaceId as string)
       .subscribe({
         next: (res) => {
           if (res.success) {
-            window.location.reload();
+            this.router.navigate([''])
+              .then(() => {
+                window.location.reload();
+              })
           }
         },
         error: (error) => {
           console.error("Couldn't delete the workspace", error);
         }
       });
+
+    return false;
   }
 }

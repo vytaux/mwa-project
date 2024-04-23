@@ -24,7 +24,7 @@ export class AddWorkspaceComponent {
     .postWorkspace(this.form.value as {name: string})
     .subscribe({
       next: (res) => {
-        this.router.navigate(['']);
+        window.location.reload();
       },
       error: (error) => {
         this.message.set("Couldn't create the workspace");

@@ -88,7 +88,9 @@ export const deleteWorkspaceById: RequestHandler<{ workspaceId: string }, Standa
 
         // User can only delete workspaces they own
         const results = await WorkspaceModel.deleteOne({
-            _id: workspaceId, owner_id: userId
+            _id: workspaceId, owner_id: userId,
+            // Prevent accidental deletion of default workspace 
+            isDefault: false
         });
 
         res.status(200).json({ success: true, data: results.deletedCount });
