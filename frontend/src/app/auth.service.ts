@@ -34,7 +34,7 @@ export interface Token {
 
 export const initialState = {
   userId: "",
-  email: "", 
+  email: "",
   // email: 'guest@todo.mania',
   token: ""
   // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjI0NjhkOGY5M2FjNWQ0M2ZhZjRiZDciLCJlbWFpbCI6InNvbWVAZ21haWwuY29tIiwiaWF0IjoxNzEzNjYyMTcyfQ.kw03uktZrpzsC72vD66ZFGtDmdB7FWnlIEU7cOU9pBM',
@@ -85,5 +85,9 @@ export class AuthService {
     }
 
     return true;
+  }
+
+  canMatch(): boolean {
+    return !this.isLoggedIn();
   }
 }
