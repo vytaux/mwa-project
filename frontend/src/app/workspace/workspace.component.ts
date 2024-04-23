@@ -9,12 +9,13 @@ import { AddTodoComponent } from '../todo/add-todo/add-todo.component';
 import { HeaderComponent } from "../header/header.component";
 import { AddMemberComponent } from "../add-member/add-member.component";
 import { AuthService } from '../auth.service';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
-  selector: 'app-workspace',
-  standalone: true,
-  templateUrl: './workspace.component.html',
-  imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent, HeaderComponent, AddMemberComponent]
+    selector: 'app-workspace',
+    standalone: true,
+    templateUrl: './workspace.component.html',
+    imports: [RouterLink, TodoComponent, AddWorkspaceComponent, AddTodoComponent, HeaderComponent, AddMemberComponent, FooterComponent]
 })
 export class WorkspaceComponent {
   readonly workspaceService = inject(WorkspaceService);
