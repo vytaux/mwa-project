@@ -1,4 +1,4 @@
-<li (click)="handleCompleted($event)" [class.bg-gray-100]="isCompleted" class="hover:cursor-pointer p-1 px-3 flex w-full border-gray-200 rounded-t-lg dark:border-gray-600 hover:bg-gray-100">
+<li (click)="handleCompleted($event)" [class.bg-gray-100]="isCompleted" class="hover:cursor-pointer p-2 px-3.5 flex w-full border-gray-200 rounded-t-lg dark:border-gray-600 hover:bg-gray-100">
     <div [class.line-through]="isCompleted">{{ todo()?.body }}</div>
 
     <a class="ml-auto hover:underline" (click)="handleDeleteTodo($event)">Delete</a>
