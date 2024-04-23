@@ -39,7 +39,7 @@
       }
    </div>
 
-   @if ($workspace()?.todos) {
+   @if ($workspace()?.todos?.length) {
       <ul
          class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
          @for (todo of $workspace()?.todos; track todo; let last = $last, first = $first) {
