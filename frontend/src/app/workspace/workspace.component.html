@@ -30,7 +30,11 @@
 
    <div class="flex justify-between mb-3">
       <app-add-todo [workspaceId]="workspaceId()" />
-      <app-add-member [workspaceId]="workspaceId()" [workspace]="$workspace()" />
+
+      <!-- Add member should only be valid for non-default (private) workspaces -->
+      @if (!$workspace()?.isDefault) {
+         <app-add-member [workspaceId]="workspaceId()" [workspace]="$workspace()" />
+      }
    </div>
 
    @if ($workspace()?.todos) {
