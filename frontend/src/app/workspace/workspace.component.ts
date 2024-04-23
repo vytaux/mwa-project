@@ -1,7 +1,7 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, model } from '@angular/core';
 import { Workspace } from '../data.types';
 import { WorkspaceService } from '../workspace.service';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, RouterLink } from '@angular/router';
 import { initFlowbite } from 'flowbite'
 import { AddWorkspaceComponent } from './add-workspace/add-workspace.component';
 import { TodoComponent } from '../todo/todo.component';
@@ -19,28 +19,42 @@ import { AuthService } from '../auth.service';
 export class WorkspaceComponent {
   readonly workspaceService = inject(WorkspaceService);
   readonly #authService = inject(AuthService);
+  routeSnapshot = inject(ActivatedRoute)
 
-  workspaceId = input<string>('');
+  workspaceId = model<string>('');
 
   $workspace = computed(() => {
-    const userId = this.#authService.$state().userId;
-    console.log(userId)
     return this.workspaceService.$readWriteWorkspaces().find(workspace => {
-      // Find the default workspace if the workspaceId is empty
-      if (this.workspaceId() === '') {
-        return workspace.isDefault && workspace.owner_id === userId; 
-      } 
-        
       // Filter by workspace by selectedId otherwise
       return workspace._id === this.workspaceId();
     });
   });
 
   constructor() {
+    const userId = this.#authService.$state().userId;
+
     this.workspaceService.getWorkspaces$
       .subscribe({
         next: (workspaces: Workspace[]) => {
           this.workspaceService.$readWriteWorkspaces.set(workspaces);
+
+          this.workspaceId.set(this.routeSnapshot.snapshot.params['workspaceId']);
+
+          this.workspaceService.$readWriteWorkspaces().find(workspace => {
+            // Find the default workspace if the workspaceId is empty
+            if (this.workspaceId() === undefined) {
+               const foundUsersDefaultWorkspace = workspace.isDefault && workspace.owner_id === userId
+      
+              if (foundUsersDefaultWorkspace) {
+                this.workspaceId.set(workspace._id);
+                return true;
+              } 
+              return false;
+            } 
+              
+            // Filter by workspace by selectedId otherwise
+            return workspace._id === this.workspaceId();
+          });
         }
       });
   }
