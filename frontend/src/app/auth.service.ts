@@ -78,12 +78,7 @@ export class AuthService {
   }
 
   canActivate(): boolean {
-    if (!this.isLoggedIn()) {
-      this.#router.navigate(['/login']);
-      return false;
-    }
-
-    return true;
+    return this.isLoggedIn();
   }
 
   canMatch(): boolean {
