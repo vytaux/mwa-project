@@ -13,7 +13,5 @@ export const routes: Routes = [
   { path: 'w/:workspaceId', loadComponent: loadWorkspaceComponent, canActivate: [AuthService] },
   { path: 'login', loadComponent: loadLoginComponent },
   { path: 'register', loadComponent: loadRegisterComponent },
-  { path: 'register', loadComponent: loadRegisterComponent },
-  { path: 'register', loadComponent: loadRegisterComponent },
   { path: '**', loadComponent: loadNotFoundComponent }
 ];
