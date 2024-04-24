@@ -5,7 +5,7 @@ const loadHomepageComponent = () => import('./homepage/homepage.component').then
 const loadWorkspaceComponent = () => import('./workspace/workspace.component').then(c => c.WorkspaceComponent);
 const loadLoginComponent = () => import('./login/login.component').then(c => c.LoginComponent);
 const loadRegisterComponent = () => import('./register/register.component').then(c => c.RegisterComponent);
-const loadNoFoundComponent = () => import('./no-found/no-found.component').then(c => c.NoFoundComponent);
+const loadNotFoundComponent = () => import('./not-found/not-found.component').then(c => c.NotFoundComponent);
 
 export const routes: Routes = [
   { path: '', loadComponent: loadHomepageComponent, canMatch: [AuthService], pathMatch: 'full' },
@@ -15,5 +15,5 @@ export const routes: Routes = [
   { path: 'register', loadComponent: loadRegisterComponent },
   { path: 'register', loadComponent: loadRegisterComponent },
   { path: 'register', loadComponent: loadRegisterComponent },
-  { path: '**', loadComponent: loadNoFoundComponent }
+  { path: '**', loadComponent: loadNotFoundComponent }
 ];
