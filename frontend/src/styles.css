@@ -3,12 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, app-root, app-homepage {
+html, body, app-root, app-homepage, app-no-found {
     height: 100%;
     display: block;
 }
 
-app-homepage, app-workspace {
+app-homepage, app-workspace, app-no-found {
     display: flex;
     flex-direction: column;
 }
