@@ -74,7 +74,7 @@ export class AuthService {
 
   logout() {
     this.$state.set(initialState);
-    this.#router.navigate(['/login']);
+    window.location.reload();
   }
 
   canActivate(): boolean {
