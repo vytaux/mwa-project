@@ -19,7 +19,7 @@
             <a [routerLink]="['/w', workspace._id]"
                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                {{ workspace.name }}
-               <a [attr.data-workspaceId]="workspace._id" (click)="handleDeleteWorkspace($event)"
+               <a (click)="handleDeleteWorkspace($event, workspace._id)"
                   class="text-sm ml-auto hover:underline">
                   <svg width="15px" height="17px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
                      fill="#000000">

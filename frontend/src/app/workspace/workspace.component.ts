@@ -68,11 +68,8 @@ export class WorkspaceComponent {
     initFlowbite();
   }
 
-  handleDeleteWorkspace(event: Event) {
+  handleDeleteWorkspace(event: Event, workspaceId: string) {
     event.stopPropagation();
-
-    const target = event.target as HTMLElement;
-    const workspaceId = target.getAttribute('data-workspaceId');
 
     this.workspaceService.deleteWorkspace$(workspaceId as string)
       .subscribe({
