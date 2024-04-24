@@ -2,7 +2,7 @@ import { InferSchemaType, Schema, model } from "mongoose";
 import { todoSchema } from "../todos/todos.model";
 
 const workspaceSchema = new Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     owner_id: { type: Schema.Types.ObjectId },
     members: [{
         _id: false,
