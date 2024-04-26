@@ -9,6 +9,7 @@ See these helpful testimonials:
 >
 > &mdash; Someone ***really*** smart.
 
+<br>
 
 ## The Team
 
@@ -16,6 +17,8 @@ With special thanks to our [Professor Asaad Saad](https://github.com/asaadsaad) 
 
 * [Vytautas Asmantavicius](https://github.com/vytaux)
 * [Aayush Raj Joshi](https://github.com/1Aayush3)
+
+<br>
 
 ## Just Run It Already.... 🥱
 
