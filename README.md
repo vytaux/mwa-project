@@ -11,7 +11,7 @@ Sᴇᴇ ᴛʜᴇsᴇ ʜᴇʟᴘꜰᴜʟ ᴛᴇsᴛɪᴍᴏɴɪᴀʟs﹕
 >
 > &mdash; Someone ***really*** smart.
 
->I can put things in there and nobody sees them, only me. Too bad I am not allowed to own any electronic device here, but I love this app TOO MUCH! lol
+>I can put things in there and nobody sees them, only me. Too bad I am not allowed to own any electronic devices here, but I love this app TOO MUCH! lol
 >
 >&mdash; Has Done Nothing Wrong.
 
