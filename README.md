@@ -33,7 +33,7 @@ Run the server:
     $ cd backend
     $ npm run start
 
-Open another terminal tab:
+In a new terminal tab:
 
     $ cd frontend
     $ ng o -s
