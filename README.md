@@ -1,6 +1,4 @@
-<div align="center">Team G11 presents</div>
-
-# <div align="center">Todo®Mania™</div>
+# <div align="center">Meet Todo®Mania™</div>
 
 Todo®Mania™ is a productivity tool, designed for effortless task management, which allows users to seamlessly add, organize, and complete tasks. The app boasts a clean and minimalist interface, ensuring users can easily navigate through their tasks and focus on what matters most. Its intuitive design promotes productivity and enhances the overall user experience.
 
