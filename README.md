@@ -2,12 +2,25 @@
 
 Todo®Mania™ is a productivity tool, designed for effortless task management, which allows users to seamlessly add, organize, and complete tasks. The app boasts a clean and minimalist interface, ensuring users can easily navigate through their tasks and focus on what matters most. Its intuitive design promotes productivity and enhances the overall user experience.
 
+<br>
+
 See these helpful testimonials:
 
 
 > "It's the 💣. Register while they haven't taken it down!"
 >
 > &mdash; Someone ***really*** smart.
+
+>I can put things in there and nobody sees them, only me. Too bad I am not allowed to own any electronic device here, but I love this app TOO MUCH! lol
+>
+>&mdash; Has Done Nothing Wrong.
+
+&
+
+>My cat founds it enjoyable.  
+> ⭐⭐/5
+>
+>&mdash; President, FunkyFingers Co.
 
 <br>
 
