@@ -5,7 +5,8 @@ Todo®Mania™ is a productivity tool, designed for effortless task management, 
 See these helpful testimonials:
 
 
-> "It's the 💣. Register while they haven't taken it down!"\
+> "It's the 💣. Register while they haven't taken it down!"
+>
 > &mdash; Someone ***really*** smart.
 
 
