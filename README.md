@@ -7,7 +7,7 @@
 
 ## The Team
 
-With special thanks to our [Professor Asaad Saad](https://github.com/asaadsaad) who overlooked our work and helped us a lot during this project.
+Thanks to our [Professor Asaad Saad](https://github.com/asaadsaad) who overlooked our work and helped us a lot during this project.
 
 * [Vytautas Asmantavicius](https://github.com/vytaux)
 * [Aayush Raj Joshi](https://github.com/1Aayush3)
