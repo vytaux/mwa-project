@@ -14,7 +14,7 @@ Thanks to our [Professor Asaad Saad](https://github.com/asaadsaad) who overlooke
 
 <br>
 
-## Just Run It Already.... 🥱
+## pls Run It Already
 
 It is assumed node and angular is installed as global dependencies.  
 
